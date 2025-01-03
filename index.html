@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3Sixty Shows</title>
+    <meta name="description"
+        content="Book your tickets for the best live entertainment events with 3Sixty Shows. Safe, secure, and reliable ticketing.">
+    <meta name="keywords" content="3Sixty Shows, Live Events, Ticketing, Concerts, Entertainment">
+    <meta name="author" content="3Sixty Shows LLC">
+
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="3Sixty Shows">
+    <meta property="og:description"
+        content="Book your tickets for the best live entertainment events with 3Sixty Shows. Safe, secure, and reliable ticketing.">
+    <meta property="og:image" content="/assets/images/background_image.jpg">
+    <meta property="og:url" content="https://www.3SixtyShows.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="3Sixty Shows">
+    <meta name="twitter:description"
+        content="Book your tickets for the best live entertainment events with 3Sixty Shows. Safe, secure, and reliable ticketing.">
+    <meta name="twitter:image" content="/assets/images/background_image.jpg">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-Fo3rlrQkTy2k5YbXUu1W8Xt2wW1FtF19G9Yov8cYt3a8/5F3+1N6J5V5U6kV2/+jXbXJcQeEJ+tuN7RIXU9hGw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0A1123',
+                            800: '#111836',
+                        },
+                        pink: {
+                            600: '#DB2777',
+                            500: '#EC4899',
+                            700: '#BE185D',
+                        },
+                        purple: {
+                            500: '#8B5CF6',
+                            600: '#9333EA',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Inline Styles for Animations and Custom Styles -->
+    <style>
+        /* Reset CSS */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #0A1123;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        a.button {
+            cursor: pointer;
+        }
+
+        /* Sponsor Card Animations */
+        .sponsor-card {
+            @apply bg-navy-800/50 backdrop-blur-sm rounded-xl transform transition-all duration-700 border border-gray-700/30 relative overflow-hidden shadow-lg group;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            will-change: transform, opacity, box-shadow;
+            opacity: 0;
+        }
+
+        .sponsor-card::before {
+            content: '';
+            @apply absolute inset-0 rounded-xl opacity-0;
+            background: linear-gradient(135deg,
+                    rgba(147, 51, 234, 0.5) 0%,
+                    rgba(236, 72, 153, 0.5) 50%,
+                    rgba(59, 130, 246, 0.5) 100%);
+            z-index: -1;
+            margin: -1px;
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sponsor-card:hover {
+            @apply shadow-2xl;
+            transform: translateY(-5px) scale(1.02);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sponsor-card:hover::before {
+            @apply opacity-100;
+        }
+
+        .sponsor-image {
+            @apply w-auto h-auto max-w-[75%] max-h-[75%] object-contain filter brightness-95 transition-all duration-700 relative z-10;
+            transform: translateZ(0);
+            will-change: transform, filter;
+        }
+
+        .sponsor-card:hover .sponsor-image {
+            @apply brightness-100;
+            transform: translateZ(20px) scale(1.05);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Typewriter Effect */
+        .typewriter-container {
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            border-right: 4px solid;
+            padding-right: 8px;
+            animation: typing-hero 2.5s steps(20, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing-hero {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: rgb(236, 72, 153);
+            }
+        }
+
+        /* Fade-in Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .fade-in-up-button {
+            animation: fadeInUp 0.8s ease-out 3.5s forwards;
+        }
+
+        /* Additional Animations and Effects */
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Responsive Aspect Ratio */
+        .aspect-w-4 {
+            aspect-ratio: 4 / 3;
+        }
+
+        .aspect-h-3 {
+            aspect-ratio: 4 / 3;
+        }
+
+        /* Entrance Animations for Sections */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+
+            .sponsor-card,
+            .typewriter-text,
+            .fade-in-up,
+            .fade-in-up-button,
+            .section-animate {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Optimized Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+            will-change: transform, opacity;
+        }
+
+        /* Remove unused animations and simplify existing ones */
+        .typewriter,
+        .typewriter-container,
+        .section-animate {
+            animation: none;
+        }
+
+        /* Optimize video performance */
+        video {
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            perspective: 1000;
+            will-change: transform;
+        }
+
+        /* Remove or simplify complex gradients and effects */
+        .bg-gradient-to-r {
+            background-size: 200% 200%;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Enhanced Professional Animations */
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientX {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes subtleZoom {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulseText {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes shine {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes bounceSlow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-25%);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .animate-slide-down {
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .animate-rotate-slow {
+            animation: rotateSlow 20s linear infinite;
+        }
+
+        .animate-pulse-text {
+            animation: pulseText 2s ease-in-out infinite;
+        }
+
+        .animate-shine {
+            animation: shine 1.5s linear infinite;
+        }
+
+        .animate-sparkle {
+            animation: sparkle 4s ease-in-out infinite;
+        }
+
+        .animate-bounce-slow {
+            animation: bounceSlow 2s ease-in-out infinite;
+        }
+
+        .animate-ping-slow {
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .delay-75 {
+            animation-delay: 75ms;
+        }
+
+        .delay-150 {
+            animation-delay: 150ms;
+        }
+
+        /* Perspective Settings */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        /* Enhanced Hover Effects */
+        .hover\:shadow-glow:hover {
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.5);
+        }
+
+        /* Background Particle Overlay */
+        .bg-particle-overlay {
+            background-image: radial-gradient(circle at center,
+                    rgba(236, 72, 153, 0.1) 0%,
+                    transparent 70%);
+        }
+
+        /* Performance Optimizations */
+        .transform-gpu {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            .animate-slide-up,
+            .animate-slide-down,
+            .animate-rotate-slow,
+            .animate-pulse-text,
+            .animate-shine,
+            .animate-sparkle,
+            .animate-bounce-slow,
+            .animate-ping-slow {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-navy-900 text-white font-roboto">
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-0"
+        aria-labelledby="hero-heading">
+        <!-- Background Layers -->
+        <div class="absolute inset-0 z-0">
+            <!-- Video Background -->
+            <video class="w-full h-full object-cover transform scale-105 animate-subtle-zoom" autoplay loop muted
+                playsinline preload="metadata" poster="/assets/images/background_image.jpg" aria-hidden="true">
+                <source src="assets/videos/bg_video.mp4" type="video/mp4">
+            </video>
+
+            <!-- Enhanced Gradient Overlay -->
+            <div
+                class="absolute inset-0 z-30 bg-gradient-to-b from-navy-900/95 via-navy-900/75 to-navy-900/90 animate-gradient">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-4 md:px-6 relative z-60">
+            <div class="text-center max-w-5xl mx-auto">
+                <!-- Enhanced Animation Structure -->
+                <div class="overflow-hidden mb-4">
+                    <h1 id="hero-heading"
+                        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider animate-slide-up">
+                        BOOK YOUR TICKETS FOR
+                    </h1>
+                </div>
+
+                <div class="overflow-hidden mb-6">
+                    <h2
+                        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-slide-up-delay-1
+                               bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x bg-clip-text text-transparent">
+                        AAJ KI RAAT NYE 2025
+                    </h2>
+                </div>
+
+                <div class="overflow-hidden mb-8 md:mb-12">
+                    <p
+                        class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay-2">
+                        Safe, secure, reliable, and trusted ticketing.
+                        <br>
+                        Your ticket to live entertainment!
+                    </p>
+                </div>
+
+                <div class="overflow-hidden">
+                    <a href="#events" class="inline-flex items-center justify-center px-8 md:px-12 py-3 md:py-4 
+                               text-base md:text-lg font-bold animate-slide-up-delay-3
+                               bg-gradient-to-r from-pink-600 to-purple-600 
+                               hover:from-pink-500 hover:to-purple-500 
+                               rounded-full transform transition-all duration-300
+                               hover:scale-105 hover:shadow-glow
+                               focus:outline-none focus:ring-2 focus:ring-purple-500 
+                               focus:ring-offset-2 focus:ring-offset-navy-900">
+                        BOOK NOW
+                        <svg class="w-5 h-5 md:w-6 md:h-6 ml-2 animate-bounce-x" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Events Section -->
+    <section id="events" class="py-12 md:py-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 md:mb-12">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2">Events</h2>
+                    <p class="text-gray-400">Be sure not to miss these events today.</p>
+                </div>
+                <a href="#current-events"
+                    class="mt-4 sm:mt-0 px-6 py-2 bg-pink-600 rounded-full text-sm font-medium hover:bg-pink-700 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
+                    NOW SHOWING
+                </a>
+            </div>
+
+            <!-- Event Card -->
+            <div
+                class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 section-animate">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="relative aspect-w-4 aspect-h-3">
+                        <div class="absolute top-4 left-4 bg-pink-600 text-white px-4 py-1 rounded-full">
+                            <span class="text-2xl font-bold">31</span>
+                            <span class="ml-1">Dec</span>
+                        </div>
+                        <img src="assets/images/Aaj-Ki-Raat-NYE-2025.png" alt="Aaj Ki Raat NYE 2025 Event Image"
+                            class="w-full h-full object-cover lazyload" loading="lazy">
+                    </div>
+                    <div class="p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-4">Aaj Ki Raat NYE 2025</h3>
+                        <p class="text-gray-400 mb-6">Rayleigh Underground</p>
+                        <a href="#book-now"
+                            class="w-full md:w-auto bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
+                            BOOK NOW
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section id="past-events" class="py-12 md:py-20 bg-navy-800">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Past Events</h2>
+            <p class="text-gray-400 mb-8">Events that you enjoyed in the past</p>
+            <!-- Past events grid will be dynamically added here -->
+        </div>
+    </section>
+
+    <!-- Sponsors & Partners Section -->
+    <section id="sponsors" class="py-12 md:py-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <!-- Sponsors Section -->
+            <div class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Our Sponsors</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto"></div>
+                </div>
+
+                <!-- Sponsors Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
+                    <!-- Sponsor 1 -->
+                    <div class="sponsor-card group">
+                        <img src="assets/images/sponsors/sponsors_1.png" alt="Sponsor DAAMI" class="sponsor-image"
+                            loading="lazy">
+                    </div>
+                    <!-- Sponsor 2 -->
+                    <div class="sponsor-card group">
+                        <img src="assets/images/sponsors/sponsors_2.png" alt="Sponsor funasia" class="sponsor-image"
+                            loading="lazy">
+                    </div>
+                    <!-- Sponsor 3 -->
+                    <div class="sponsor-card group">
+                        <img src="assets/images/sponsors/sponsors_3.png" alt="Sponsor PR" class="sponsor-image"
+                            loading="lazy">
+                    </div>
+                    <!-- Sponsor 4 -->
+                    <div class="sponsor-card group">
+                        <img src="assets/images/sponsors/sponsors_4.png" alt="Sponsor times-news" class="sponsor-image"
+                            loading="lazy">
+                    </div>
+                    <!-- Sponsor 5 -->
+                    <div class="sponsor-card group">
+                        <img src="assets/images/sponsors/sponsors_5.png" alt="Sponsor NME" class="sponsor-image"
+                            loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partners Section -->
+            <div class="mb-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Partners</h2>
+                    <p class="text-gray-400 text-lg mb-6">Working together to create amazing experiences</p>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                </div>
+
+                <!-- Partners Grid -->
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
+                        <!-- Partner 1 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_1.png" alt="Partner DAAMI"
+                                    class="sponsor-image" loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 2 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_2.png" alt="Partner funasia"
+                                    class="sponsor-image" loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 3 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_3.png" alt="Partner PR" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 4 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_4.png" alt="Partner times-news"
+                                    class="sponsor-image" loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 5 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_5.png" alt="Partner NME" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 6 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_6.png" alt="Partner SQR" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 7 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_7.png" alt="Partner EE" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 8 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_8.png" alt="Partner 8" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 9 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_9.png" alt="Partner 9" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 10 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_10.png" alt="Partner 10" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 11 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_11.png" alt="Partner 11" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                        <!-- Partner 12 -->
+                        <div class="sponsor-card group">
+                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
+                                <img src="assets/images/partners/partners_12.png" alt="Partner 12" class="sponsor-image"
+                                    loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h2 class="text-xl md:text-2xl font-bold mb-6">CONTACT 3SIXTY SHOWS LLC</h2>
+            <a href="tel:+1855360SHOWS"
+                class="text-2xl md:text-3xl font-bold block mb-2 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+                +1-855-360-SHOWS
+            </a>
+            <a href="mailto:info@3SixtyShows.com"
+                class="text-lg hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+                info@3SixtyShows.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Inline Scripts for Animations and Component Loading -->
+    <script>
+        // Load header and footer components
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                // Initialize section animations after header is loaded
+                initSectionAnimations();
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        /**
+         * Initialize Animations for Sections and Elements
+         */
+        function initSectionAnimations() {
+            const sections = document.querySelectorAll('.section-animate');
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        /**
+         * Initialize Sponsor and Partner Card Animations
+         */
+        function initSponsorPartnerAnimations() {
+            const sponsorCards = document.querySelectorAll('.sponsor-card');
+            sponsorCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-fade-in');
+                }, index * 150); // 150ms delay between each card
+            });
+        }
+
+        // Initialize Sponsor and Partner Animations when Sponsors Section is in view
+        const sponsorsSection = document.getElementById('sponsors');
+        if (sponsorsSection) {
+            const sponsorObserver = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initSponsorPartnerAnimations();
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            });
+
+            sponsorObserver.observe(sponsorsSection);
+        }
+
+        /**
+         * Handle Video Playback Fallback
+         */
+        function handleVideoPlayback() {
+            const video = document.querySelector('video');
+            if (video) {
+                video.play().catch(error => {
+                    console.warn("Video autoplay failed:", error);
+                    // Video failed to play - fallback to static image is already in place
+                });
+            }
+        }
+
+        /**
+         * Preload Background Image
+         */
+        function preloadBackgroundImage() {
+            const bgImage = new Image();
+            bgImage.src = '/assets/images/background_image.jpg';
+            bgImage.onload = function () {
+                // Additional actions can be performed here if needed
+            };
+        }
+
+        /**
+         * Optimize Performance by Disabling Animations When Not in Viewport
+         */
+        function optimizeAnimations() {
+            const cards = document.querySelectorAll('.sponsor-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0;
+                card.style.willChange = isInViewport ? 'transform, opacity' : 'auto';
+            });
+        }
+
+        window.addEventListener('scroll', optimizeAnimations, { passive: true });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            handleVideoPlayback();
+            preloadBackgroundImage();
+        });
+    </script>
+
+    <!-- Additional Inline Styles for Animations -->
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</body>
+
+</html>
