@@ -1,61 +1,334 @@
-<!DOCTYPE html>
-<html lang="en">
-<header class="fixed w-full z-50 transition-all duration-300" id="header">
-    <!-- Glass morphism effect for header -->
-    <div class="backdrop-blur-md bg-navy-900/80 border-b border-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <img src="assets/images/logo.png" alt="3Sixty Shows"
-                        class="h-14 w-auto hover:scale-105 transition-transform">
-                </div>
+<custom-header>
+    <template id="header-template">
+        <style>
+            :host {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+            }
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="nav-link group">
-                        HOME
-                        <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-pink-600"></span>
-                    </a>
-                    <a href="#" class="nav-link group">
-                        ABOUT US
-                        <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-pink-600"></span>
-                    </a>
-                    <a href="#" class="nav-link group">
-                        GALLERY
-                        <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-pink-600"></span>
-                    </a>
-                    <a href="#" class="nav-link group">
-                        VIDEO GALLERY
-                        <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-pink-600"></span>
-                    </a>
-                    <a href="#" class="nav-link group">
-                        EVENTS
-                        <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-pink-600"></span>
-                    </a>
+            .header {
+                background: rgba(10, 17, 35, 0.95);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .logo {
+                display: block;
+                transition: transform 0.3s ease;
+            }
+
+            .logo:hover {
+                transform: scale(1.05);
+            }
+
+            .logo img {
+                height: 40px;
+                width: auto;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-menu a {
+                color: #fff;
+                text-decoration: none;
+                margin: 0 15px;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #DB2777;
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 0.3s ease;
+            }
+
+            .nav-menu a:hover {
+                color: #DB2777;
+            }
+
+            .nav-menu a:hover::after {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+            .hamburger {
+                width: 30px;
+                height: 20px;
+                position: relative;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 100%;
+                height: 2px;
+                background: #fff;
+                position: absolute;
+                left: 0;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .hamburger span:nth-child(1) {
+                top: 0;
+            }
+
+            .hamburger span:nth-child(2) {
+                top: 9px;
+                transform-origin: center;
+            }
+
+            .hamburger span:nth-child(3) {
+                top: 18px;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                transform: scaleX(0);
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .mobile-nav {
+                background: rgba(10, 17, 35, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                transform: translateY(-100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: absolute;
+                width: 100%;
+                visibility: hidden;
+            }
+
+            .mobile-nav.active {
+                transform: translateY(0);
+                visibility: visible;
+            }
+
+            .mobile-nav a {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                padding: 15px 20px;
+                font-size: 16px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transform: translateX(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav.active a {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            .mobile-nav a:hover {
+                background: rgba(219, 39, 119, 0.1);
+                color: #DB2777;
+                padding-left: 25px;
+            }
+
+            /* Stagger animation delays for mobile menu items */
+            .mobile-nav a:nth-child(1) {
+                transition-delay: 0.1s;
+            }
+
+            .mobile-nav a:nth-child(2) {
+                transition-delay: 0.15s;
+            }
+
+            .mobile-nav a:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+
+            .mobile-nav a:nth-child(4) {
+                transition-delay: 0.25s;
+            }
+
+            .mobile-nav a:nth-child(5) {
+                transition-delay: 0.3s;
+            }
+
+            .mobile-nav a:nth-child(6) {
+                transition-delay: 0.35s;
+            }
+
+            @media (min-width: 768px) {
+                .hamburger {
+                    display: none;
+                }
+
+                .nav-menu {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .mobile-nav {
+                    display: none !important;
+                }
+            }
+
+            /* Header scroll effect */
+            .header.scrolled {
+                background: rgba(10, 17, 35, 0.98);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Icon Styles */
+            .nav-menu a i,
+            .mobile-nav a i {
+                margin-right: 8px;
+                font-size: 16px;
+                transition: transform 0.3s ease;
+            }
+
+            .nav-menu a:hover i {
+                transform: translateY(-2px);
+            }
+
+            .mobile-nav a i {
+                width: 20px;
+                text-align: center;
+                color: #DB2777;
+            }
+
+            .mobile-nav a:hover i {
+                transform: translateX(5px);
+            }
+        </style>
+
+        <div class="header">
+            <div class="container">
+                <a href="/" class="logo">
+                    <img src="assets/images/logo.png" alt="3Sixty Shows">
+                </a>
+
+                <nav class="nav-menu">
+                    <a href="/"><i class="fas fa-house-modern"></i>HOME</a>
+                    <a href="/about"><i class="fas fa-building-columns"></i>ABOUT US</a>
+                    <a href="/gallery"><i class="fas fa-photo-film"></i>GALLERY</a>
+                    <a href="/video-gallery"><i class="fas fa-clapperboard"></i>VIDEO GALLERY</a>
+                    <a href="/events"><i class="fas fa-ticket"></i>EVENTS</a>
+                    <a href="/account"><i class="fas fa-user"></i>MY ACCOUNT</a>
                 </nav>
 
-                <!-- Account Button -->
-                <div class="flex items-center space-x-4">
-                    <button
-                        class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-pink-600 rounded-full group focus:ring-2 focus:ring-pink-400 focus:outline-none">
-                        <span class="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </span>
-                        <span class="transition-all group-hover:translate-x-4">MY ACCOUNT</span>
-                    </button>
-                </div>
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="mobile-nav">
+                <a href="/"><i class="fas fa-house-modern"></i>HOME</a>
+                <a href="/about"><i class="fas fa-building-columns"></i>ABOUT US</a>
+                <a href="/gallery"><i class="fas fa-photo-film"></i>GALLERY</a>
+                <a href="/video-gallery"><i class="fas fa-clapperboard"></i>VIDEO GALLERY</a>
+                <a href="/events"><i class="fas fa-ticket"></i>EVENTS</a>
+                <a href="/account"><i class="fas fa-user"></i>MY ACCOUNT</a>
             </div>
         </div>
-    </div>
-</header>
+    </template>
 
-</html>
+    <script>
+        class CustomHeader extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+
+                // Load Font Awesome
+                const fontAwesome = document.createElement('link');
+                fontAwesome.rel = 'stylesheet';
+                fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+                document.head.appendChild(fontAwesome);
+            }
+
+            connectedCallback() {
+                const template = document.getElementById('header-template');
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+                const header = this.shadowRoot.querySelector('.header');
+                const hamburger = this.shadowRoot.querySelector('.hamburger');
+                const mobileNav = this.shadowRoot.querySelector('.mobile-nav');
+
+                // Smooth scroll header effect
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+
+                // Toggle mobile menu with animation
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    mobileNav.classList.toggle('active');
+                    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+                });
+
+                // Mobile menu link click handler
+                mobileNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Add exit animation
+                        mobileNav.style.transition = 'all 0.3s ease-in';
+                        hamburger.classList.remove('active');
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Handle window resize
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        if (window.innerWidth >= 768) {
+                            hamburger.classList.remove('active');
+                            mobileNav.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                    }, 250);
+                });
+            }
+        }
+
+        customElements.define('custom-header', CustomHeader);
+    </script>
+</custom-header>

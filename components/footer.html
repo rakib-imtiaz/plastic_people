@@ -1,32 +1,39 @@
-<footer class="relative bg-navy-900 pt-20 pb-6 overflow-hidden">
+<footer class="relative bg-navy-900 pt-12 sm:pt-16 md:pt-20 pb-6 overflow-hidden">
     <!-- Decorative Elements -->
     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600"></div>
     <div class="absolute inset-0 bg-grid-white/[0.02] -z-1"></div>
 
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+    <div class="container mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
             <!-- Company Info -->
-            <div class="col-span-1 md:col-span-2">
-                <img src="assets/images/logo.png" alt="3Sixty Shows" class="h-12 mb-6">
-                <p class="text-gray-400 mb-6">Your premier destination for live entertainment and unforgettable
-                    experiences.</p>
+            <div class="col-span-1 sm:col-span-2">
+                <img src="assets/images/logo.png" alt="3Sixty Shows"
+                    class="h-10 sm:h-12 mb-4 sm:mb-6 transform transition-transform duration-300 hover:scale-105">
+                <p class="text-gray-400 mb-6 text-sm sm:text-base">
+                    Your premier destination for live entertainment and unforgettable experiences.
+                </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook-f"></i>
+                    <a href="#" class="social-link group">
+                        <i
+                            class="fab fa-facebook-f transform group-hover:scale-110 transition-transform duration-300"></i>
                     </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
+                    <a href="#" class="social-link group">
+                        <i
+                            class="fab fa-instagram transform group-hover:scale-110 transition-transform duration-300"></i>
                     </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
+                    <a href="#" class="social-link group">
+                        <i class="fab fa-youtube transform group-hover:scale-110 transition-transform duration-300"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                <ul class="space-y-4">
+                <h3 class="text-lg font-bold mb-4 sm:mb-6 relative inline-block">
+                    Quick Links
+                    <span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-pink-600"></span>
+                </h3>
+                <ul class="space-y-2 sm:space-y-4">
                     <li><a href="#" class="footer-link">About Us</a></li>
                     <li><a href="#" class="footer-link">Active Events</a></li>
                     <li><a href="#" class="footer-link">Past Events</a></li>
@@ -36,27 +43,34 @@
 
             <!-- Contact Info -->
             <div>
-                <h3 class="text-lg font-bold mb-6">Contact Us</h3>
-                <div class="space-y-4">
-                    <p class="flex items-center">
-                        <i class="fas fa-phone mr-3 text-pink-600"></i>
-                        +1-855-360-SHOWS
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fas fa-envelope mr-3 text-pink-600"></i>
-                        Info@3SixtyShows.com
-                    </p>
+                <h3 class="text-lg font-bold mb-4 sm:mb-6 relative inline-block">
+                    Contact Us
+                    <span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-pink-600"></span>
+                </h3>
+                <div class="space-y-2 sm:space-y-4">
+                    <a href="tel:+18553607469" class="contact-link group">
+                        <i
+                            class="fas fa-phone mr-3 text-pink-600 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span>+1-855-360-SHOWS</span>
+                    </a>
+                    <a href="mailto:Info@3SixtyShows.com" class="contact-link group">
+                        <i
+                            class="fas fa-envelope mr-3 text-pink-600 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span>Info@3SixtyShows.com</span>
+                    </a>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Bar -->
         <div class="border-t border-gray-800 pt-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2024 3Sixty Shows LLC. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+            <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <p class="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+                    © 2024 3Sixty Shows LLC. All rights reserved.
+                </p>
+                <div class="flex space-x-4 sm:space-x-6">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -65,10 +79,18 @@
 
 <style>
     .social-link {
-        @apply w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all;
+        @apply w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gradient-to-r from-pink-600 to-purple-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1;
     }
 
     .footer-link {
-        @apply text-gray-400 hover:text-white transition-colors;
+        @apply text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300 inline-block hover:translate-x-2 transform;
+    }
+
+    .contact-link {
+        @apply flex items-center text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300;
+    }
+
+    .footer-bottom-link {
+        @apply text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300;
     }
 </style>

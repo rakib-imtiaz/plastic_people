@@ -460,284 +460,549 @@
                 transform: none;
             }
         }
+
+        /* Enhanced Card Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes width {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes beam {
+            0% {
+                transform: translateX(-200%) rotate(45deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateX(200%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-width {
+            animation: width 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-beam-left {
+            animation: beam 4s linear infinite;
+        }
+
+        .animate-beam-right {
+            animation: beam 4s linear infinite;
+            animation-delay: 2s;
+        }
+
+        /* Enhanced Card Styles */
+        .sponsor-card,
+        .partner-card {
+            @apply bg-navy-800/50 backdrop-blur-sm rounded-xl transform transition-all duration-700 border border-gray-700/30 relative overflow-hidden shadow-lg;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .sponsor-card::before,
+        .partner-card::before {
+            content: '';
+            @apply absolute inset-0 rounded-xl opacity-0;
+            background: linear-gradient(135deg,
+                    rgba(147, 51, 234, 0.5) 0%,
+                    rgba(236, 72, 153, 0.5) 50%,
+                    rgba(59, 130, 246, 0.5) 100%);
+            z-index: -1;
+            margin: -1px;
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sponsor-card:hover::before,
+        .partner-card:hover::before {
+            @apply opacity-100;
+        }
+
+        /* Optimized Performance */
+        .sponsor-card,
+        .partner-card {
+            will-change: transform, opacity;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            .animate-float,
+            .animate-width,
+            .animate-beam-left,
+            .animate-beam-right {
+                animation: none;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-navy-900 text-white font-roboto">
-    <!-- Include Header -->
-    <div id="header-container"></div>
+    <!-- Header Container -->
+    <div id="header-container">
+        <custom-header></custom-header>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-0"
-        aria-labelledby="hero-heading">
-        <!-- Background Layers -->
-        <div class="absolute inset-0 z-0">
-            <!-- Video Background -->
-            <video class="w-full h-full object-cover transform scale-105 animate-subtle-zoom" autoplay loop muted
-                playsinline preload="metadata" poster="/assets/images/background_image.jpg" aria-hidden="true">
-                <source src="assets/videos/bg_video.mp4" type="video/mp4">
-            </video>
+    <!-- Main Content -->
+    <main>
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-0"
+            aria-labelledby="hero-heading">
+            <!-- Background Layers -->
+            <div class="absolute inset-0 z-0">
+                <!-- Video Background -->
+                <video class="w-full h-full object-cover transform scale-105 animate-subtle-zoom" autoplay loop muted
+                    playsinline preload="metadata" poster="/assets/images/background_image.jpg" aria-hidden="true">
+                    <source src="assets/videos/bg_video.mp4" type="video/mp4">
+                </video>
 
-            <!-- Enhanced Gradient Overlay -->
-            <div
-                class="absolute inset-0 z-30 bg-gradient-to-b from-navy-900/95 via-navy-900/75 to-navy-900/90 animate-gradient">
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div class="container mx-auto px-4 md:px-6 relative z-60">
-            <div class="text-center max-w-5xl mx-auto">
-                <!-- Enhanced Animation Structure -->
-                <div class="overflow-hidden mb-4">
-                    <h1 id="hero-heading"
-                        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider animate-slide-up">
-                        BOOK YOUR TICKETS FOR
-                    </h1>
-                </div>
-
-                <div class="overflow-hidden mb-6">
-                    <h2
-                        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-slide-up-delay-1
-                               bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x bg-clip-text text-transparent">
-                        AAJ KI RAAT NYE 2025
-                    </h2>
-                </div>
-
-                <div class="overflow-hidden mb-8 md:mb-12">
-                    <p
-                        class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay-2">
-                        Safe, secure, reliable, and trusted ticketing.
-                        <br>
-                        Your ticket to live entertainment!
-                    </p>
-                </div>
-
-                <div class="overflow-hidden">
-                    <a href="#events" class="inline-flex items-center justify-center px-8 md:px-12 py-3 md:py-4 
-                               text-base md:text-lg font-bold animate-slide-up-delay-3
-                               bg-gradient-to-r from-pink-600 to-purple-600 
-                               hover:from-pink-500 hover:to-purple-500 
-                               rounded-full transform transition-all duration-300
-                               hover:scale-105 hover:shadow-glow
-                               focus:outline-none focus:ring-2 focus:ring-purple-500 
-                               focus:ring-offset-2 focus:ring-offset-navy-900">
-                        BOOK NOW
-                        <svg class="w-5 h-5 md:w-6 md:h-6 ml-2 animate-bounce-x" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
+                <!-- Enhanced Gradient Overlay -->
+                <div
+                    class="absolute inset-0 z-30 bg-gradient-to-b from-navy-900/95 via-navy-900/75 to-navy-900/90 animate-gradient">
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Current Events Section -->
-    <section id="events" class="py-12 md:py-20">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 md:mb-12">
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-2">Events</h2>
-                    <p class="text-gray-400">Be sure not to miss these events today.</p>
-                </div>
-                <a href="#current-events"
-                    class="mt-4 sm:mt-0 px-6 py-2 bg-pink-600 rounded-full text-sm font-medium hover:bg-pink-700 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
-                    NOW SHOWING
-                </a>
-            </div>
-
-            <!-- Event Card -->
-            <div
-                class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 section-animate">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="relative aspect-w-4 aspect-h-3">
-                        <div class="absolute top-4 left-4 bg-pink-600 text-white px-4 py-1 rounded-full">
-                            <span class="text-2xl font-bold">31</span>
-                            <span class="ml-1">Dec</span>
-                        </div>
-                        <img src="assets/images/Aaj-Ki-Raat-NYE-2025.png" alt="Aaj Ki Raat NYE 2025 Event Image"
-                            class="w-full h-full object-cover lazyload" loading="lazy">
+            <!-- Content -->
+            <div class="container mx-auto px-4 md:px-6 relative z-60">
+                <div class="text-center max-w-5xl mx-auto">
+                    <!-- Enhanced Animation Structure -->
+                    <div class="overflow-hidden mb-4">
+                        <h1 id="hero-heading"
+                            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider animate-slide-up">
+                            BOOK YOUR TICKETS FOR
+                        </h1>
                     </div>
-                    <div class="p-6 md:p-8 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold mb-4">Aaj Ki Raat NYE 2025</h3>
-                        <p class="text-gray-400 mb-6">Rayleigh Underground</p>
-                        <a href="#book-now"
-                            class="w-full md:w-auto bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
+
+                    <div class="overflow-hidden mb-6">
+                        <h2
+                            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-slide-up-delay-1
+                                   bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x bg-clip-text text-transparent">
+                            AAJ KI RAAT NYE 2025
+                        </h2>
+                    </div>
+
+                    <div class="overflow-hidden mb-8 md:mb-12">
+                        <p
+                            class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-slide-up-delay-2">
+                            Safe, secure, reliable, and trusted ticketing.
+                            <br>
+                            Your ticket to live entertainment!
+                        </p>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <a href="#events" class="inline-flex items-center justify-center px-8 md:px-12 py-3 md:py-4 
+                                   text-base md:text-lg font-bold animate-slide-up-delay-3
+                                   bg-gradient-to-r from-pink-600 to-purple-600 
+                                   hover:from-pink-500 hover:to-purple-500 
+                                   rounded-full transform transition-all duration-300
+                                   hover:scale-105 hover:shadow-glow
+                                   focus:outline-none focus:ring-2 focus:ring-purple-500 
+                                   focus:ring-offset-2 focus:ring-offset-navy-900">
                             BOOK NOW
+                            <svg class="w-5 h-5 md:w-6 md:h-6 ml-2 animate-bounce-x" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Past Events Section -->
-    <section id="past-events" class="py-12 md:py-20 bg-navy-800">
-        <div class="container mx-auto px-4 md:px-6">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">Past Events</h2>
-            <p class="text-gray-400 mb-8">Events that you enjoyed in the past</p>
-            <!-- Past events grid will be dynamically added here -->
-        </div>
-    </section>
-
-    <!-- Sponsors & Partners Section -->
-    <section id="sponsors" class="py-12 md:py-20">
-        <div class="container mx-auto px-4 md:px-6">
-            <!-- Sponsors Section -->
-            <div class="mb-20">
-                <div class="text-center mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Our Sponsors</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto"></div>
+        <!-- Current Events Section -->
+        <section id="events" class="py-12 md:py-20">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-8 md:mb-12">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Events</h2>
+                        <p class="text-gray-400">Be sure not to miss these events today.</p>
+                    </div>
+                    <a href="#current-events"
+                        class="mt-4 sm:mt-0 px-6 py-2 bg-pink-600 rounded-full text-sm font-medium hover:bg-pink-700 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
+                        NOW SHOWING
+                    </a>
                 </div>
 
-                <!-- Sponsors Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-                    <!-- Sponsor 1 -->
-                    <div class="sponsor-card group">
-                        <img src="assets/images/sponsors/sponsors_1.png" alt="Sponsor DAAMI" class="sponsor-image"
-                            loading="lazy">
-                    </div>
-                    <!-- Sponsor 2 -->
-                    <div class="sponsor-card group">
-                        <img src="assets/images/sponsors/sponsors_2.png" alt="Sponsor funasia" class="sponsor-image"
-                            loading="lazy">
-                    </div>
-                    <!-- Sponsor 3 -->
-                    <div class="sponsor-card group">
-                        <img src="assets/images/sponsors/sponsors_3.png" alt="Sponsor PR" class="sponsor-image"
-                            loading="lazy">
-                    </div>
-                    <!-- Sponsor 4 -->
-                    <div class="sponsor-card group">
-                        <img src="assets/images/sponsors/sponsors_4.png" alt="Sponsor times-news" class="sponsor-image"
-                            loading="lazy">
-                    </div>
-                    <!-- Sponsor 5 -->
-                    <div class="sponsor-card group">
-                        <img src="assets/images/sponsors/sponsors_5.png" alt="Sponsor NME" class="sponsor-image"
-                            loading="lazy">
+                <!-- Event Card -->
+                <div
+                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 section-animate">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="relative aspect-w-4 aspect-h-3">
+                            <div class="absolute top-4 left-4 bg-pink-600 text-white px-4 py-1 rounded-full">
+                                <span class="text-2xl font-bold">31</span>
+                                <span class="ml-1">Dec</span>
+                            </div>
+                            <img src="assets/images/Aaj-Ki-Raat-NYE-2025.png" alt="Aaj Ki Raat NYE 2025 Event Image"
+                                class="w-full h-full object-cover lazyload" loading="lazy">
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-4">Aaj Ki Raat NYE 2025</h3>
+                            <p class="text-gray-400 mb-6">Rayleigh Underground</p>
+                            <a href="#book-now"
+                                class="w-full md:w-auto bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
+                                BOOK NOW
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Partners Section -->
-            <div class="mb-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Partners</h2>
-                    <p class="text-gray-400 text-lg mb-6">Working together to create amazing experiences</p>
-                    <div class="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+        <!-- Past Events Section -->
+        <section id="past-events" class="py-12 md:py-20 bg-navy-800">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Past Events</h2>
+                <p class="text-gray-400 mb-8">Events that you enjoyed in the past</p>
+                <!-- Past events grid will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Sponsors & Partners Section -->
+        <section id="sponsors" class="relative py-12 sm:py-20 md:py-32 overflow-hidden">
+            <!-- Animated Background -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-800 to-navy-900"></div>
+                <!-- Dynamic Light Beams -->
+                <div class="absolute inset-0 opacity-20">
+                    <div class="absolute top-0 left-1/4 w-1 h-full bg-pink-500 rotate-45 animate-beam-left"></div>
+                    <div class="absolute top-0 right-1/4 w-1 h-full bg-purple-500 -rotate-45 animate-beam-right"></div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <!-- Sponsors Section -->
+                <div class="mb-16 sm:mb-24 md:mb-32">
+                    <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 animate-slide-up">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
+                                Our Sponsors
+                            </span>
+                        </h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto animate-width"></div>
+                    </div>
+
+                    <!-- Sponsors Grid -->
+                    <div
+                        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 perspective-1000">
+                        <!-- Sponsor 1 -->
+                        <div class="sponsor-card group animate-float" style="animation-delay: 0ms;">
+                            <div class="relative p-4 sm:p-6 h-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="relative h-full flex items-center justify-center transform-gpu 
+                                          transition-all duration-500 group-hover:scale-110">
+                                    <img src="assets/images/sponsors/sponsors_1.png" alt="Sponsor 1"
+                                        class="sponsor-image w-full max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor 2 -->
+                        <div class="sponsor-card group animate-float" style="animation-delay: 100ms;">
+                            <div class="relative p-4 sm:p-6 h-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="relative h-full flex items-center justify-center transform-gpu 
+                                          transition-all duration-500 group-hover:scale-110">
+                                    <img src="assets/images/sponsors/sponsors_2.png" alt="Sponsor 2"
+                                        class="sponsor-image w-full max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor 3 -->
+                        <div class="sponsor-card group animate-float" style="animation-delay: 200ms;">
+                            <div class="relative p-4 sm:p-6 h-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="relative h-full flex items-center justify-center transform-gpu 
+                                          transition-all duration-500 group-hover:scale-110">
+                                    <img src="assets/images/sponsors/sponsors_3.png" alt="Sponsor 3"
+                                        class="sponsor-image w-full max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor 4 -->
+                        <div class="sponsor-card group animate-float" style="animation-delay: 300ms;">
+                            <div class="relative p-4 sm:p-6 h-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="relative h-full flex items-center justify-center transform-gpu 
+                                          transition-all duration-500 group-hover:scale-110">
+                                    <img src="assets/images/sponsors/sponsors_4.png" alt="Sponsor 4"
+                                        class="sponsor-image w-full max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor 5 -->
+                        <div class="sponsor-card group animate-float" style="animation-delay: 400ms;">
+                            <div class="relative p-4 sm:p-6 h-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="relative h-full flex items-center justify-center transform-gpu 
+                                          transition-all duration-500 group-hover:scale-110">
+                                    <img src="assets/images/sponsors/sponsors_5.png" alt="Sponsor 5"
+                                        class="sponsor-image w-full max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Partners Grid -->
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
+                <!-- Partners Section -->
+                <div class="relative">
+                    <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 animate-slide-up">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+                                Our Partners
+                            </span>
+                        </h2>
+                        <p class="text-gray-400 text-base sm:text-lg mb-4 sm:mb-6 animate-slide-up-delay-1">
+                            Creating Unforgettable Experiences Together
+                        </p>
+                        <div
+                            class="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full animate-width">
+                        </div>
+                    </div>
+
+                    <!-- Partners Grid -->
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 perspective-1000">
                         <!-- Partner 1 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_1.png" alt="Partner DAAMI"
-                                    class="sponsor-image" loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 0ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_1.png" alt="Partner 1" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 2 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_2.png" alt="Partner funasia"
-                                    class="sponsor-image" loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 100ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_2.png" alt="Partner 2" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 3 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_3.png" alt="Partner PR" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 200ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_3.png" alt="Partner 3" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 4 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_4.png" alt="Partner times-news"
-                                    class="sponsor-image" loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 300ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_4.png" alt="Partner 4" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 5 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_5.png" alt="Partner NME" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 400ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_5.png" alt="Partner 5" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 6 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_6.png" alt="Partner SQR" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 500ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_6.png" alt="Partner 6" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 7 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_7.png" alt="Partner EE" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 600ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_7.png" alt="Partner 7" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 8 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_8.png" alt="Partner 8" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 700ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_8.png" alt="Partner 8" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 9 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_9.png" alt="Partner 9" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 800ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_9.png" alt="Partner 9" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 10 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_10.png" alt="Partner 10" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 900ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_10.png" alt="Partner 10" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 11 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_11.png" alt="Partner 11" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 1000ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_11.png" alt="Partner 11" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
+
                         <!-- Partner 12 -->
-                        <div class="sponsor-card group">
-                            <div class="aspect-w-4 aspect-h-3 flex items-center justify-center p-8">
-                                <img src="assets/images/partners/partners_12.png" alt="Partner 12" class="sponsor-image"
-                                    loading="lazy">
+                        <div class="partner-card group animate-float" style="animation-delay: 1100ms;">
+                            <div class="relative aspect-w-4 aspect-h-3 bg-navy-800/50 rounded-xl overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 opacity-0 
+                                          group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 transform-gpu 
+                                          transition-all duration-700 group-hover:scale-110">
+                                    <img src="assets/images/partners/partners_12.png" alt="Partner 12" class="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 
+                                                transition-all duration-500" loading="lazy">
+                                </div>
+                                <div class="absolute inset-0 border border-transparent group-hover:border-purple-500/30 
+                                          rounded-xl transition-colors duration-500"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-12 md:py-20 bg-gradient-to-r from-purple-600 to-blue-600">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-xl md:text-2xl font-bold mb-6">CONTACT 3SIXTY SHOWS LLC</h2>
-            <a href="tel:+1855360SHOWS"
-                class="text-2xl md:text-3xl font-bold block mb-2 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
-                +1-855-360-SHOWS
-            </a>
-            <a href="mailto:info@3SixtyShows.com"
-                class="text-lg hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
-                info@3SixtyShows.com
-            </a>
-        </div>
-    </section>
+        <!-- Contact Section -->
+        <section id="contact" class="py-12 md:py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <h2 class="text-xl md:text-2xl font-bold mb-6">CONTACT 3SIXTY SHOWS LLC</h2>
+                <a href="tel:+1855360SHOWS"
+                    class="text-2xl md:text-3xl font-bold block mb-2 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+                    +1-855-360-SHOWS
+                </a>
+                <a href="mailto:info@3SixtyShows.com"
+                    class="text-lg hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
+                    info@3SixtyShows.com
+                </a>
+            </div>
+        </section>
 
-    <!-- Include Footer -->
-    <div id="footer-container"></div>
+        <!-- Include Footer -->
+        <div id="footer-container"></div>
+    </main>
 
     <!-- Inline Scripts for Animations and Component Loading -->
     <script>
@@ -746,8 +1011,12 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-container').innerHTML = data;
-                // Initialize section animations after header is loaded
-                initSectionAnimations();
+
+                // Re-run any necessary initialization
+                const headerScript = document.querySelector('#header-container script');
+                if (headerScript) {
+                    eval(headerScript.textContent);
+                }
             })
             .catch(error => console.error('Error loading header:', error));
 
