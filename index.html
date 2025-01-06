@@ -501,7 +501,7 @@
         }
 
         .animate-float {
-            animation: float 6s ease-in-out infinite;
+            animation: float 6s ease-out infinite;
         }
 
         .animate-width {
@@ -559,6 +559,414 @@
                 animation: none;
             }
         }
+
+        .events-section {
+            padding: 2rem 1rem;
+            background: #0A1123;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 0.75rem;
+        }
+
+        /* Mobile-first header styles */
+        .events-header {
+            display: flex;
+            flex-direction: column;
+            /* Stack elements on mobile */
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            /* Center text on mobile */
+        }
+
+        .events-title h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            color: #fff;
+        }
+
+        .events-title p {
+            color: #94A3B8;
+            font-size: 0.875rem;
+        }
+
+        .now-showing-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.25rem;
+            background: #DB2777;
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: fit-content;
+            margin: 0 auto;
+            /* Center button on mobile */
+        }
+
+        .now-showing-btn:hover {
+            background: #BE185D;
+            transform: translateY(-2px);
+        }
+
+        .now-showing-btn i {
+            margin-right: 0.4rem;
+        }
+
+        /* Event Card Mobile Styles */
+        .event-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 400px;
+            /* Limit width on mobile */
+        }
+
+        .event-grid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-image-container {
+            position: relative;
+            aspect-ratio: 16/9;
+            max-height: 200px;
+            /* Smaller height on mobile */
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-date {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: #DB2777;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            /* Smaller font on mobile */
+        }
+
+        .date-day {
+            font-size: 1.125rem;
+            font-weight: bold;
+        }
+
+        .date-month {
+            font-size: 0.875rem;
+        }
+
+        .event-details {
+            padding: 1rem;
+        }
+
+        .event-details h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-details p {
+            color: #94A3B8;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.875rem;
+        }
+
+        .book-now-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            /* Full width on mobile */
+            padding: 0.75rem;
+            background: #DB2777;
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .book-now-btn:hover {
+            background: #BE185D;
+            transform: translateY(-2px);
+        }
+
+        .book-now-btn i {
+            margin-right: 0.4rem;
+        }
+
+        /* Tablet Breakpoint */
+        @media (min-width: 640px) {
+            .events-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .event-card {
+                max-width: 100%;
+            }
+
+            .event-details {
+                padding: 1.25rem;
+            }
+
+            .book-now-btn {
+                width: auto;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        /* Desktop Breakpoint */
+        @media (min-width: 768px) {
+            .events-section {
+                padding: 4rem 2rem;
+            }
+
+            .events-header {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                align-items: center;
+            }
+
+            .now-showing-btn {
+                margin: 0;
+                /* Reset margin */
+            }
+
+            .event-grid {
+                display: grid;
+                grid-template-columns: 3fr 2fr;
+            }
+
+            .event-image-container {
+                max-height: 250px;
+            }
+
+            .event-details {
+                padding: 1.5rem;
+            }
+
+            .event-details h3 {
+                font-size: 1.25rem;
+            }
+
+            .book-now-btn {
+                display: inline-flex;
+                padding: 0.75rem 2rem;
+            }
+        }
+
+        /* Large Desktop Breakpoint */
+        @media (min-width: 1024px) {
+            .events-section {
+                padding: 5rem 2rem;
+            }
+
+            .events-title h2 {
+                font-size: 1.75rem;
+            }
+
+            .event-image-container {
+                max-height: 300px;
+            }
+        }
+
+        .contact-section {
+            padding: 5rem 1rem;
+            background: linear-gradient(to bottom, #0A1123, #1E293B);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-header h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-header p {
+            color: #94A3B8;
+            font-size: 1.1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: #DB2777;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card p {
+            color: #94A3B8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #DB2777;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: #BE185D;
+        }
+
+        .contact-form {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            color: #DB2777;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: #DB2777;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(219, 39, 119, 0.2);
+        }
+
+        .input-group textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #DB2777;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #BE185D;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .contact-section {
+                padding: 7rem 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -577,7 +985,7 @@
                 <!-- Video Background -->
                 <video class="w-full h-full object-cover transform scale-105 animate-subtle-zoom" autoplay loop muted
                     playsinline preload="metadata" poster="/assets/images/background_image.jpg" aria-hidden="true">
-                    <source src="assets/videos/bg_video.mp4" type="video/mp4">
+                    <source src="assets/videos/bg_video_3.mp4" type="video/mp4">
                 </video>
 
                 <!-- Enhanced Gradient Overlay -->
@@ -636,38 +1044,40 @@
         </section>
 
         <!-- Current Events Section -->
-        <section id="events" class="py-12 md:py-20">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-8 md:mb-12">
-                    <div>
-                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Events</h2>
-                        <p class="text-gray-400">Be sure not to miss these events today.</p>
+        <section id="events" class="events-section">
+            <div class="container">
+                <div class="events-header">
+                    <div class="events-title">
+                        <h2>Events</h2>
+                        <p>Be sure not to miss these events today.</p>
                     </div>
-                    <a href="#current-events"
-                        class="mt-4 sm:mt-0 px-6 py-2 bg-pink-600 rounded-full text-sm font-medium hover:bg-pink-700 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
-                        NOW SHOWING
+                    <a href="#current-events" class="now-showing-btn">
+                        <i class="fas fa-play-circle"></i> NOW SHOWING
                     </a>
                 </div>
 
-                <!-- Event Card -->
-                <div
-                    class="bg-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 section-animate">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        <div class="relative aspect-w-4 aspect-h-3">
-                            <div class="absolute top-4 left-4 bg-pink-600 text-white px-4 py-1 rounded-full">
-                                <span class="text-2xl font-bold">31</span>
-                                <span class="ml-1">Dec</span>
+                <!-- Event Cards Container -->
+                <div class="events-container">
+                    <!-- Event Card -->
+                    <div class="event-card">
+                        <div class="event-grid">
+                            <!-- Event Image Section -->
+                            <div class="event-image-container">
+                                <div class="event-date">
+                                    <span class="date-day">31</span>
+                                    <span class="date-month">Dec</span>
+                                </div>
+                                <img src="assets/images/Aaj-Ki-Raat-NYE-2025.png" alt="Aaj Ki Raat NYE 2025 Event Image"
+                                    loading="lazy">
                             </div>
-                            <img src="assets/images/Aaj-Ki-Raat-NYE-2025.png" alt="Aaj Ki Raat NYE 2025 Event Image"
-                                class="w-full h-full object-cover lazyload" loading="lazy">
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold mb-4">Aaj Ki Raat NYE 2025</h3>
-                            <p class="text-gray-400 mb-6">Rayleigh Underground</p>
-                            <a href="#book-now"
-                                class="w-full md:w-auto bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-navy-800">
-                                BOOK NOW
-                            </a>
+                            <!-- Event Details Section -->
+                            <div class="event-details">
+                                <h3>Aaj Ki Raat NYE 2025</h3>
+                                <p><i class="fas fa-map-marker-alt"></i> Rayleigh Underground</p>
+                                <a href="#book-now" class="book-now-btn">
+                                    <i class="fas fa-ticket-alt"></i> BOOK NOW
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -986,17 +1396,81 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-12 md:py-20 bg-gradient-to-r from-purple-600 to-blue-600">
-            <div class="container mx-auto px-4 md:px-6 text-center">
-                <h2 class="text-xl md:text-2xl font-bold mb-6">CONTACT 3SIXTY SHOWS LLC</h2>
-                <a href="tel:+1855360SHOWS"
-                    class="text-2xl md:text-3xl font-bold block mb-2 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
-                    +1-855-360-SHOWS
-                </a>
-                <a href="mailto:info@3SixtyShows.com"
-                    class="text-lg hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600">
-                    info@3SixtyShows.com
-                </a>
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-header">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions? We'd love to hear from you.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Our Location</h3>
+                            <p>123 Event Street, London, UK</p>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-phone-alt"></i>
+                            <h3>Phone Number</h3>
+                            <p>+44 (0) 123 456 7890</p>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Address</h3>
+                            <p>info@3sixtyshows.com</p>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="name" placeholder="Your Name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="email" placeholder="Your Email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <i class="fas fa-tag"></i>
+                                    <input type="text" id="subject" placeholder="Subject" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <i class="fas fa-comment-alt"></i>
+                                    <textarea id="message" placeholder="Your Message" required></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
